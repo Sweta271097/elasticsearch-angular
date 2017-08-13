@@ -15,21 +15,7 @@
 		<!-- row -->
 		<div class="row">
 			<div class="col-sm-1"></div>
-			<div class="col-sm-10">
-				<ul id="myTab1" class="nav nav-tabs bordered">
-			<li class="active">
-				<a href="#s1" data-toggle="tab">Search All <i class="fa fa-caret-down"></i></a>
-			</li>
-			<li>
-				<a href="#s2" data-toggle="tab">Users</a>
-			</li>
-			<li>
-				<a href="#s3" data-toggle="tab">Search History</a>
-			</li>
-			<li class="pull-right hidden-mobile">
-				<a href="javascript:void(0);"> <span class="note">About 24,431 results (0.15 seconds) </span> </a>
-			</li>
-		</ul>
+			<div class="col-sm-10">					
 				<div id="myTabContent1" class="tab-content bg-color-white padding-10">
 					<div class="tab-pane fade in active" id="s1">
 						<h1> Search <span class="semi-bold">Everything</span> "<span id="search_key_view"></span>"</h1>
@@ -55,169 +41,42 @@
 									</li>
 								</ul>
 							</div>
-							<input class="form-control input-lg" type="text" placeholder="Search again..." id="search-project">
+							<input class="form-control input-lg" type="text" [(ngModel)]="query" #ctrl="ngModel" (keyup.enter)="getSearch()" placeholder="Search..."  id="search-project" >
 							<div class="input-group-btn">
-								<button type="submit" class="btn btn-default">
+								<button type="submit" class="btn btn-default" (click)="getSearch()">
 									&nbsp;&nbsp;&nbsp;<i class="fa fa-fw fa-search fa-lg"></i>&nbsp;&nbsp;&nbsp;
 								</button>
 							</div>
 						</div>
 
-						<h1 class="font-md"> Search Results for <span class="semi-bold">Projects</span><small class="text-danger"> &nbsp;&nbsp;(2,281 results)</small></h1>
+						<h1 class="font-md">Search Results for <span class="semi-bold">Projects</span><small class="text-danger"> &nbsp;&nbsp;({{totalCount}} results)</small></h1>
 
-						<div class="search-results clearfix smart-form">
-
-							<h4><i class="fa fa-plus-square txt-color-blue"></i>&nbsp;<a href="javascript:void(0);">SmartAdmin - Responsive Dashboard Template</a></h4>
-
-							<div>
-								<div class="rating display-inline">
-									<input type="radio" name="stars-rating" id="stars-rating-5">
-									<label for="stars-rating-5"><i class="fa fa-star"></i></label>
-									<input type="radio" name="stars-rating" id="stars-rating-4">
-									<label for="stars-rating-4"><i class="fa fa-star"></i></label>
-									<input type="radio" name="stars-rating" id="stars-rating-3">
-									<label for="stars-rating-3"><i class="fa fa-star"></i></label>
-									<input type="radio" name="stars-rating" id="stars-rating-2">
-									<label for="stars-rating-2"><i class="fa fa-star"></i></label>
-									<input type="radio" name="stars-rating" id="stars-rating-1">
-									<label for="stars-rating-1"><i class="fa fa-star"></i></label>
-								</div>
-								<br>
-								<div class="url text-success">
-									http://www.wrapbootstrap.com <i class="fa fa-caret-down"></i>
-								</div>
-								<p class="description">
-									Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
-								</p>
-							</div>
-
-						</div>
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);">SmartAdmin- Responsive Dashboard Template</a></h4>
+						<div class="search-results clearfix" *ngFor="let result of results">
+							<h4><a href="javascript:void(0);">{{result.title}}</a></h4>
 							<div>
 								<p class="note">
-									<a href="javascript:void(0);"><i class="fa fa-thumbs-up"></i> Like this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
+									<span>{{result.author}}</span>
+									<span>| {{result.publisher}}</span>
+									<span>| {{result.publish_date}}</span>
+									<span>| {{result.price}}</span>
 								</p>
-								<div class="url text-success">
-									http://www.wrapbootstrap.com <i class="fa fa-caret-down"></i>
-								</div>
 								<p class="description">
-									It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here...
+									{{result.summary}}
 								</p>
 							</div>
 						</div>
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);">SmartAdmin- Responsive Dashboard Template</a>&nbsp;&nbsp;<a href="javascript:void(0);"><i class="fa fa-caret-up fa-lg"></i></a></h4>
-							<img src="img/demo/sample.jpg" alt="">
-							<div>
-								<p class="note">
-									<a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
-								</p>
-								<div class="url text-success">
-									smartadmin/index.html?#ajax/gallery.html <i class="fa fa-caret-down"></i>
-								</div>
-								<p class="description">
-									Oct 1, 2006 - Uploaded by 02842356107
-									<br>
-									<br>
-									<a href="javascript:void(0)" class="btn btn-default btn-xs">Go to gallery</a>
-								</p>
-							</div>
-
-						</div>
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);">Company project Timeline Stock</a>&nbsp;&nbsp;<a href="javascript:void(0);"><i class="fa fa-caret-up fa-lg"></i></a></h4>
-
-							<div>
-
-								<span class="sparkline txt-color-blueLight" data-sparkline-type="line" data-sparkline-width="150px" data-sparkline-height="25px"><canvas width="150" height="25" style="display: inline-block; width: 150px; height: 25px; vertical-align: top;"></canvas></span>
-								<span class="display-inline note font-lg semi-bold"><small><i class="fa fa-arrow-circle-up text-success"></i> 143.43</small></span>
-
-								<p class="note">
-									<a href="javascript:void(0);"><i class="fa fa-thumbs-up"></i> Like this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
-								</p>
-								<div class="url text-success">
-									Dashboard &gt; Projects &gt; IT Report <i class="fa fa-caret-down"></i>
-								</div>
-								<p class="description">
-									Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
-								</p>
-							</div>
-
-						</div>
-
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);"> Company project Timeline Stock</a>&nbsp;&nbsp;<a href="javascript:void(0);"></a><small>[PDF]</small></h4>
-							<span class="sparkline txt-color-blueLight display-inline" data-sparkline-type="pie" data-sparkline-offset="90" data-sparkline-piesize="55px"><canvas width="55" height="55" style="display: inline-block; width: 55px; height: 55px; vertical-align: top;"></canvas></span>
-							<div>
-								<p class="note">
-									<a href="javascript:void(0);"><i class="fa fa-thumbs-up"></i> Like this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
-								</p>
-								<div class="url text-success">
-									Dashboard &gt; Projects &gt; IT Report <i class="fa fa-caret-down"></i>
-								</div>
-								<p class="description">
-									Last updated by <a href="javascript:void(0);">Rusho Burthoth </a>
-								</p>
-							</div>
-
-						</div>
-
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);">SmartAdmin- Responsive Dashboard Template</a></h4>
-							<div>
-								<p class="note">
-									<a href="javascript:void(0);"><i class="fa fa-thumbs-up"></i> Like this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
-								</p>
-								<div class="url text-success">
-									http://www.wrapbootstrap.com <i class="fa fa-caret-down"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="search-results clearfix">
-							<h4><a href="javascript:void(0);">SmartAdmin- Responsive Dashboard Template</a></h4>
-							<div>
-								<p class="note">
-									<a href="javascript:void(0);"><i class="fa fa-thumbs-up"></i> Like this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-chain"></i> Share this link&nbsp;&nbsp;</a>
-									<a href="javascript:void(0);"><i class="fa fa-star txt-color-yellow"></i> Favorite&nbsp;&nbsp;</a>
-								</p>
-								<div class="url text-success">
-									http://www.wrapbootstrap.com <i class="fa fa-caret-down"></i>
-								</div>
-								<p class="description">
-									Last updated by <a href="javascript:void(0);">Rusho Burthoth </a>
-								</p>
-							</div>
-						</div>
+						
 
 						<div class="text-center">
 							<hr>
 							<ul class="pagination no-margin">
-								<li class="prev disabled">
+								<li class="prev" [ngClass]="{'disabled': pageNum<=1 }">
 									<a href="javascript:void(0);">Previous</a>
 								</li>
 								<li class="active">
 									<a href="javascript:void(0);">1</a>
 								</li>
-								<li>
-									<a href="javascript:void(0);">2</a>
-								</li>
-								<li>
-									<a href="javascript:void(0);">3</a>
-								</li>
-								<li class="next">
+								<li class="next" [ngClass]="{'disabled': totalCount<=pageNum}">
 									<a href="javascript:void(0);">Next</a>
 								</li>
 							</ul>
