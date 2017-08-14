@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
 	private pageNum: number = 1;
 	private results: Array<any>;
 	private query: string = "";
+	private numbers: Array<any> = [1];
 	
   	constructor(public searchService: SearchService) { }
 
@@ -22,11 +23,7 @@ export class SearchComponent implements OnInit {
   	}
 
 	getSearch() {
-		//var pageNum = 1;
 		var perPage = 10;
-		//var pageCount = 1;
-		//this.query = "사회";
-		//var totalCount = 0;
 		
 		if (this.query != "") {
 			this.searchService.getSearch("books", "book", this.query, this.pageNum, perPage).then((searchResult) => {
@@ -34,7 +31,8 @@ export class SearchComponent implements OnInit {
 	                                        .map((hit) => hit._source);
 					console.log(this.results);
 	                this.totalCount = this.results.length;
-					this.pageCount = Math.ceil(this.totalCount / perPage);	        
+					this.pageCount = Math.ceil(this.totalCount / perPage);	 
+					this.numbers = Array(this.pageCount).fill(0).map((x,i)=>i+1);       
 	            },
 	            err => {
 	                console.log(err);
@@ -43,4 +41,8 @@ export class SearchComponent implements OnInit {
 	        );
 		}
     }
+
+    formatPrice(num) { 
+    	return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") 
+    };
 }

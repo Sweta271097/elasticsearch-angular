@@ -27,6 +27,11 @@ export class SearchService {
 		        "_all": query
 		      }
 		    }
+		    ,sort: {
+            	"price": {
+               		"order": "desc"
+        		}
+        	}
 		  }
 		});
 

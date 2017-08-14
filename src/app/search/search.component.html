@@ -58,7 +58,7 @@
 									<span>{{result.author}}</span>
 									<span>| {{result.publisher}}</span>
 									<span>| {{result.publish_date}}</span>
-									<span>| {{result.price}}</span>
+									<span>| {{formatPrice(result.price)}}</span>
 								</p>
 								<p class="description">
 									{{result.summary}}
@@ -73,10 +73,10 @@
 								<li class="prev" [ngClass]="{'disabled': pageNum<=1 }">
 									<a href="javascript:void(0);">Previous</a>
 								</li>
-								<li class="active">
-									<a href="javascript:void(0);">1</a>
+								<li [ngClass]="{'active': pageNum==number }" *ngFor="let number of numbers">
+									<a href="javascript:void(0);">{{number}}</a>
 								</li>
-								<li class="next" [ngClass]="{'disabled': totalCount<=pageNum}">
+								<li class="next" [ngClass]="{'disabled': pageNum>=pageCount}">
 									<a href="javascript:void(0);">Next</a>
 								</li>
 							</ul>
