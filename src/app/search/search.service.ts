@@ -15,24 +15,26 @@ export class SearchService {
 		});
 	}
 
-	getSearch(index, type, query, pageNum, perPage) {
-		var response = this._client.search({
-		  index: index,
-		  type: type,
-		  from: (pageNum - 1) * perPage,
-	  	  size: perPage,
-		  body: {
-		    query: {
-		      match: {
-		        "_all": query
-		      }
-		    }
-		    ,sort: {
-            	"price": {
-               		"order": "desc"
-        		}
-        	}
-		  }
+	getSearch(index, query, pageNum, perPage) {
+		var requestBody = []
+
+		if (index == "news" || index == "All") {
+		    requestBody.push({ index: "news", type: "news" });
+		    requestBody.push({ query: { match: { "_all": query } }, sort: { "date": { "order": "desc" } }, from: (pageNum - 1) * perPage, size: perPage });
+		}
+	    
+	    if (index == "blogs" || index == "All") {
+			requestBody.push({ index: "blogs", type: "blog" });
+		    requestBody.push({ query: { match: { "_all": query } }, sort: { "date": { "order": "desc" } }, from: (pageNum - 1) * perPage, size: perPage });
+		}
+		
+	    if (index == "books" || index == "All") {
+		    requestBody.push({ index: "books", type: "book" });
+		    requestBody.push({ query: { match: { "_all": query } }, sort: { "price": { "order": "desc" } } , from: (pageNum - 1) * perPage, size: perPage});
+	    }
+
+		var response = this._client.msearch({
+		  body: requestBody
 		});
 
 		return response;
