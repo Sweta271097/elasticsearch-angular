@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
 	private numbers: Array<any> = [1];
 	private isShowDropdown: boolean = false;
 	private indices: Array<string> = ["All", "news", "blogs", "books"];
-	private indicesName: Array<string> = ["Everything", "News", "Blogs", "Books"];
+	private indicesName: Array<string> = ["Search All", "News", "Blogs", "Books"];
 	private countPerIndex : Map<string, number> = new Map<string, number>();
 	private index: string = this.indices[0];
 	private indexName: string = this.indicesName[0];
@@ -85,21 +85,21 @@ export class SearchComponent implements OnInit {
 
     doMore(index) {
     	this.index = index;
+    	this.indexName = this.getIndeName(index);
 
-    	for (let i=0; i<=this.indices.length; i++) {
-    		if (index == this.indices[i]) {
-				this.indexName = this.indicesName[i];
-    		}
-    	}
-
-    	//this.pageNum = 1;
     	this.getSearch(1);
     }
 
-    doPaging(pageNum) {
-    	console.log("pageNum :  " + pageNum);
-    	this.pageNum = pageNum;
-    	this.getSearch(pageNum);
+    getIndeName(index) {
+    	let indexName: string = "";
+
+    	for (let i=0; i<=this.indices.length; i++) {
+    		if (index == this.indices[i]) {
+				indexName = this.indicesName[i];
+    		}
+    	}
+
+    	return indexName;
     }
 
     getIndexCount(index) {

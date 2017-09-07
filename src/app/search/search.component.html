@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-sm-1"></div>
 			<div class="col-sm-10">					
-				<div id="myTabContent1" class="tab-content bg-color-white padding-10">
+				<div class="tab-content bg-color-white padding-10">
 					<div class="tab-pane fade in active" id="s1">
 						<br>
 						<div class="input-group input-group-lg hidden-mobile">
@@ -38,10 +38,25 @@
 							</div>
 						</div>
 
-						<h1 class="font-md">Search Results for <span class="semi-bold">Projects</span><small class="text-danger"> &nbsp;&nbsp;({{totalCount}} results)</small></h1>
+						<br/><br/>
+
+						<ul id="myTab1" class="nav nav-tabs bordered">
+							<li *ngFor="let value of indices; let i = index" [class.active]="index==value">
+								<a href="javascript:void(0)" (click)="doMore(value)">{{indicesName[i]}} </a>
+							</li>
+							
+							<li class="pull-right hidden-mobile">
+								<a href="javascript:void(0);"> <span class="note">About {{totalCount}} results </span> </a>
+							</li>
+						</ul>
+
+						<br/>
 
 						<div *ngFor="let result of results">
 							<div class="search-results clearfix" *ngFor="let item of result.hits.hits; let i = index">
+								<div style="border-bottom:1px dashed #E3E3E3" *ngIf="i%perPage == 0">
+									<h2>{{getIndeName(item._index)}}</h2>
+								</div>
 								<!-- news search results -->
 								<div class="search-results clearfix" *ngIf="item._index == 'news'">
 									<h4><a href="{{item._source.url}}">{{item._source.title}}</a></h4>
