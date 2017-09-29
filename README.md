@@ -1,7 +1,16 @@
 # ElasitcsearchAngular
 
-This project for Elasticsearch clien with Angular.
+This project for Elasticsearch client with Angular and Bootstrap.
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
+
+## Features
+* Multiple indices
+* MultiMatchQuery
+* Paginated
+
+## Requirements
+* NPM
+* Elasticsearch requires 5.5 or higher
 
 ## Installation
 * [Download](https://www.elastic.co/downloads/elasticsearch) and unzip the Elasticsearch official distribution.
